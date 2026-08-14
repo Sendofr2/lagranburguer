@@ -1,5 +1,6 @@
 import { type MenuItem } from '../data/menu';
 import { formatPrice } from '../utils/format';
+import { WHATSAPP_NUMBER } from '../data/config';
 import { Star, Egg, Beef, ChevronRight } from 'lucide-react';
 
 const TOPPINGS = [
@@ -7,6 +8,13 @@ const TOPPINGS = [
   { name: 'Bacon', icon: Beef },
   { name: 'Doble Cheddar', icon: Star },
 ];
+
+function orderLink(label: string): string {
+  const text = encodeURIComponent(
+    `¡Hola De la Gran Burger! Quiero pedir: ${label}`,
+  );
+  return `https://wa.me/${WHATSAPP_NUMBER.replace(/[^0-9]/g, '')}?text=${text}`;
+}
 
 type Props = { items: MenuItem[] };
 
@@ -40,9 +48,12 @@ export default function MenuFeed({ items }: Props) {
               <p className="mt-1 text-sm text-gray-400">{item.description}</p>
               <div className="mt-4 space-y-2">
                 {TOPPINGS.map((t) => (
-                  <div
+                  <a
                     key={t.name}
-                    className="flex items-center justify-between rounded-lg bg-white/5 px-3 py-2"
+                    href={orderLink(`Topping ${t.name} (${formatPrice(item.price!)} c/u)`)}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center justify-between rounded-lg bg-white/5 px-3 py-2 transition-all hover:bg-gold/15 active:scale-[0.98]"
                   >
                     <span className="flex items-center gap-2 text-sm text-gray-300">
                       <t.icon className="h-4 w-4 text-gold" />
@@ -51,7 +62,7 @@ export default function MenuFeed({ items }: Props) {
                     <span className="font-heading text-sm font-bold text-gold">
                       {formatPrice(item.price!)} c/u
                     </span>
-                  </div>
+                  </a>
                 ))}
               </div>
             </article>
@@ -59,11 +70,17 @@ export default function MenuFeed({ items }: Props) {
         }
 
         const isPromo = item.category === 'Promociones';
+        const orderLabel = item.oldPrice
+          ? `${item.name} — ${formatPrice(item.price!)}`
+          : `${item.name} — ${formatPrice(item.price!)}`;
 
         return (
-          <article
+          <a
             key={item.id}
-            className={`group overflow-hidden rounded-2xl border bg-deepgrey transition-all duration-300 hover:shadow-xl hover:shadow-black/40 ${
+            href={orderLink(orderLabel)}
+            target="_blank"
+            rel="noreferrer"
+            className={`group block overflow-hidden rounded-2xl border bg-deepgrey transition-all duration-300 hover:shadow-xl hover:shadow-black/40 active:scale-[0.98] ${
               isPromo
                 ? 'border-ember/50 hover:border-ember'
                 : 'border-white/10 hover:border-gold/40'
@@ -127,10 +144,13 @@ export default function MenuFeed({ items }: Props) {
                     {formatPrice(item.price!)}
                   </span>
                 )}
-                <ChevronRight className="h-5 w-5 text-gray-600 transition-transform group-hover:translate-x-1 group-hover:text-gold" />
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-gold/15 px-3 py-1.5 font-heading text-[11px] font-bold uppercase tracking-wider text-gold transition-colors group-hover:bg-gold group-hover:text-charcoal">
+                  Pedir
+                  <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                </span>
               </div>
             </div>
-          </article>
+          </a>
         );
       })}
     </div>
