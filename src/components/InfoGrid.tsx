@@ -1,6 +1,16 @@
 import { ADDRESS, SCHEDULE, MAPS_LINK, WHATSAPP_LINK, PHONE_DISPLAY } from '../data/config';
 import { MapPin, Clock, Navigation, Phone } from 'lucide-react';
 
+const scheduleRows = [
+  ['Viernes', SCHEDULE.viernes],
+  ['Sábado', SCHEDULE.sabado],
+  ['Domingo', SCHEDULE.domingo],
+  ['Lunes', SCHEDULE.lunes],
+  ['Martes', SCHEDULE.martes],
+  ['Miércoles', SCHEDULE.miercoles],
+  ['Jueves', SCHEDULE.jueves],
+] as const;
+
 export default function InfoGrid() {
   return (
     <section id="info" className="mx-auto max-w-5xl px-6 py-10 sm:py-14">
@@ -41,9 +51,16 @@ export default function InfoGrid() {
               <h3 className="font-heading font-bold uppercase tracking-wider text-gold text-sm">
                 Horarios
               </h3>
-              <p className="mt-1.5 text-gray-300 text-sm leading-relaxed">
-                {SCHEDULE.todos_los_dias}
-              </p>
+              <ul className="mt-2 space-y-1 text-sm">
+                {scheduleRows.map(([day, hours]) => (
+                  <li key={day} className="flex items-center justify-between gap-4">
+                    <span className="text-gray-400">{day}</span>
+                    <span className={hours === 'Cerrado' ? 'text-ember-light' : 'font-semibold text-gray-200'}>
+                      {hours}
+                    </span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>

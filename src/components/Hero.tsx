@@ -1,4 +1,4 @@
-import { BRAND_NAME, BRAND_TAGLINE, BRAND_LOCATION } from '../data/config';
+import { BRAND_NAME, BRAND_TAGLINE } from '../data/config';
 import { getOpenStatus } from '../utils/format';
 import { ChevronDown, UtensilsCrossed } from 'lucide-react';
 
@@ -22,11 +22,14 @@ export default function Hero() {
       <div className="absolute left-1/2 top-24 -z-0 h-72 w-72 -translate-x-1/2 rounded-full bg-gold/10 blur-3xl pointer-events-none" />
 
       <div className="relative mx-auto max-w-5xl px-6 pt-14 pb-12 sm:pt-20 sm:pb-16 text-center">
-        {/* logo placeholder */}
-        <div className="mx-auto mb-6 grid h-28 w-28 sm:h-32 sm:w-32 place-items-center rounded-full border-2 border-gold/70 bg-gradient-to-br from-charcoal to-deepgrey shadow-[0_0_40px_-8px_rgba(244,208,63,0.4)]">
-          <span className="text-center font-heading text-[11px] sm:text-xs font-black uppercase leading-tight text-gold tracking-tight">
-            De la<br />Gran<br />Burger
-          </span>
+        {/* logo */}
+        <div className="mx-auto mb-6 h-28 w-28 overflow-hidden rounded-full border-2 border-gold/70 bg-deepgrey shadow-[0_0_40px_-8px_rgba(244,208,63,0.4)] sm:h-32 sm:w-32">
+          <img
+            src="/imagenes/menu/Logogranburger%20copy.webp"
+            alt={`Logo de ${BRAND_NAME}`}
+            className="h-full w-full object-cover"
+            loading="eager"
+          />
         </div>
 
         {/* status badge */}
