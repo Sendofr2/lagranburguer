@@ -22,18 +22,18 @@ export default function CategoryFilter({ active, onChange, counts }: Props) {
           <button
             key={cat}
             onClick={() => onChange(cat)}
-            className={`group relative shrink-0 rounded-full px-5 py-2.5 font-display text-sm font-semibold uppercase tracking-wider transition-all active:scale-95 ${
+            className={`group relative shrink-0 rounded-full px-5 py-2.5 font-heading text-sm font-bold uppercase tracking-wider transition-all active:scale-95 ${
               isActive
-                ? 'bg-fire text-white shadow-lg shadow-fire/30'
-                : 'border border-white/12 bg-deepgrey text-gray-400 hover:border-amber/50 hover:text-amber'
+                ? 'bg-gold text-charcoal shadow-lg shadow-gold/30'
+                : 'border border-white/12 bg-deepgrey text-gray-400 hover:border-gold/50 hover:text-gold'
             }`}
           >
             {cat}
             <span
-              className={`ml-2 inline-flex items-center justify-center rounded-full px-1.5 py-0.5 text-[10px] font-bold ${
+              className={`ml-2 inline-flex items-center justify-center rounded-full px-1.5 py-0.5 text-[10px] font-black ${
                 isActive
-                  ? 'bg-white/20 text-white'
-                  : 'bg-white/5 text-gray-500 group-hover:text-amber'
+                  ? 'bg-charcoal/20 text-charcoal'
+                  : 'bg-white/5 text-gray-500 group-hover:text-gold'
               }`}
             >
               {count}
